@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a view template to display a list of rows.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the container.
+ * - rows: A list of rows.
+ *   - attributes: The row's HTML attributes.
+ *   - content: The row's contents.
+ * - title: The title of this group of rows. May be empty.
+ *
+ * @see template_preprocess_views_style_sliver_slider()
+ */
+#}
+<div class="main-box" id="main-landing-box">
+  <div class="slider" id="slider">
+  {% for row in rows %}
+
+    <img src="{{ row.url }}" alt="Slide 2" class="active">
+    
+  {% endfor %}
+</div></div>

@@ -1,0 +1,1312 @@
+<style>
+/* === General Reset & Base Styles === */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0b1a33;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* === NEW CSS FOR FLYING FLAG EFFECT === */
+.flying-flag {
+  height: 80px; /* Adjust size relative to logo */
+  width: auto;
+  position: absolute; /* Allows precise placement relative to header */
+  top: 50%; /* Center vertically within the header */
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.left-flag {
+  left: 40px; /* Space from the left edge of the header */
+}
+
+.right-flag {
+  right: 40px; /* Space from the right edge of the header */
+}
+/* Note: The main header needs space, so the logo image needs to be adjusted. 
+ The main header rule is updated below to center the logo and ensure flags are visible. */
+header {
+  display: flex;
+  /* Changed from justify-content: center to space-between or similar 
+   to allow children to position themselves, but we'll use position: absolute
+   to keep the original center effect on the logo. */
+  position: relative; /* Essential for absolute flag positioning */
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+  background-color: #0b1a33;
+  border-bottom: 1px solid #112240;
+}
+/* END NEW CSS */
+
+header img {
+  height: 100px;
+  width: auto;
+}
+
+/* ======================================= */
+/* === Left Vertical Menu CSS === */
+/* ======================================= */
+
+.vertical-menu {
+  position: absolute;
+  top: 200px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  z-index: 20;
+  width: 50px;
+}
+
+.vmenu-item {
+  position: relative;
+  height: 180px;
+  background: linear-gradient(145deg, #0b1a33, #1e3a5f);
+  border-radius: 8px;
+  border: 1px solid #1e3a5f;
+  transition: all 0.3s ease;
+  overflow: visible;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.vertical-menu > .vmenu-item {
+  border-top: none;
+}
+.vertical-menu > .vmenu-item:last-child {
+  border-bottom: none;
+}
+
+.vmenu-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  transform-origin: center;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #a3c4ff;
+  padding: 10px 5px;
+  transition: color 0.3s;
+}
+
+.vmenu-item:hover {
+  background: linear-gradient(145deg, #1e3a5f, #2a4d7a);
+  box-shadow: 4px 4px 15px rgba(79, 163, 255, 0.4);
+  z-index: 21;
+  transform: translateX(5px);
+}
+
+.vmenu-item:hover .vmenu-label {
+  color: #fff;
+}
+
+.vmenu-dropdown {
+  position: absolute;
+  top: -2px;
+  left: 50px;
+  display: none;
+  flex-direction: column;
+  background-color: #112240;
+  border: 2px solid #4fa3ff;
+  border-left: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
+  min-width: 200px;
+  height: calc(100% + 4px);
+  overflow: hidden;
+}
+
+.vmenu-dropdown a {
+  padding: 8px 15px;
+  color: #a3c4ff;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  transition: background-color 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+
+.vmenu-dropdown a:hover {
+  background-color: #4fa3ff;
+  color: #0b1a33;
+}
+
+.vmenu-item:hover .vmenu-dropdown {
+  display: flex;
+}
+
+/* ==========================================================
+   Gallery Index Grid Layout
+   ========================================================== */
+.gallery-index-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Responsive grid */
+  gap: 25px; /* Space between cards */
+  padding: 30px; /* Padding around the whole grid */
+  max-width: 1200px; /* Max width to keep it centered and readable */
+  margin: 40px auto; /* Center the grid on the page */
+  background-color: #f8f9fa; /* Light background for the grid area */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+}
+
+/* ==========================================================
+   Individual Gallery Folder Card Styling
+   ========================================================== */
+.gallery-folder-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  background-color: #ffffff; /* White background for each card */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Lighter shadow for individual cards */
+  text-decoration: none; /* Remove underline from the link */
+  color: #333; /* Default text color */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effects */
+  text-align: center;
+  min-height: 150px; /* Ensure a minimum height for consistent look */
+  border: 1px solid #eee; /* Subtle border */
+}
+
+.gallery-folder-card:hover {
+  transform: translateY(-8px); /* Lift card on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* More pronounced shadow on hover */
+  color: #0056b3; /* Change text color on hover */
+}
+
+/* ==========================================================
+   Folder Icon Styling
+   ========================================================== */
+.gallery-folder-card .folder-icon {
+  font-size: 60px; /* Make the emoji/icon larger */
+  margin-bottom: 15px; /* Space between icon and label */
+  line-height: 1; /* Ensure icon doesn't add extra line height */
+}
+
+/* You can use a real image icon too: */
+/*
+.gallery-folder-card .folder-icon {
+    width: 60px;
+    height: 60px;
+    background-image: url('path/to/your/folder-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-bottom: 15px;
+}
+*/
+
+/* ==========================================================
+   Folder Label Styling
+   ========================================================== */
+.gallery-folder-card .folder-label {
+  font-size: 1.2em; /* Slightly larger text for the folder name */
+  font-weight: 600; /* Bolder text */
+  color: #2c3e50; /* Darker text for better readability */
+  word-break: break-word; /* Ensure long names wrap */
+}
+
+.gallery-folder-card:hover .folder-label {
+  color: #007bff; /* Highlight label text on hover */
+}
+
+/* ==========================================================
+   Responsive Adjustments (if needed, though grid handles much)
+   ========================================================== */
+@media (max-width: 768px) {
+  .gallery-index-grid {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(150px, 1fr)
+    ); /* Smaller cards on smaller screens */
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .gallery-folder-card {
+    padding: 20px;
+    min-height: 120px;
+  }
+
+  .gallery-folder-card .folder-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+  }
+
+  .gallery-folder-card .folder-label {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-index-grid {
+    grid-template-columns: 1fr; /* Stack cards vertically on very small screens */
+    padding: 15px;
+    gap: 15px;
+  }
+}
+
+/* ==========================================================
+   Final Image Gallery Grid Layout
+   ========================================================== */
+.gallery-grid-final {
+  display: grid;
+  /* Create responsive columns: min 250px wide, max 4 columns */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  padding: 30px 0;
+  margin-top: 20px;
+}
+
+/* ==========================================================
+   Individual Image Link (Thumbnail Wrapper)
+   ========================================================== */
+.gallery-link {
+  display: block; /* Important for links wrapping block elements */
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-link:hover {
+  transform: scale(1.03); /* Slight zoom on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================
+   Image Styling
+   ========================================================== */
+.gallery-grid-final img {
+  width: 100%;
+  height: 200px; /* Fixed height for consistent thumbnail size */
+  object-fit: cover; /* Ensures images cover the area without distortion */
+  display: block;
+  transition: opacity 0.3s;
+}
+
+.gallery-grid-final img:hover {
+  opacity: 0.9;
+}
+
+/* ============================================= */
+/* === Main Box & Course Containers === */
+/* ============================================= */
+.main-box,
+#course-details-container {
+  margin: 40px auto;
+  width: calc(100% - 160px);
+  max-width: 1400px;
+  background-color: #112240;
+  border-radius: 12px;
+  padding: 40px;
+  border: 3px solid #1e3a5f;
+  box-shadow: 0 0 25px #1e3a5f40;
+  position: relative;
+  transition: opacity 0.5s ease;
+}
+
+/* === Course Details Container Style === */
+#course-details-container {
+  display: none;
+  min-height: 600px;
+}
+
+#course-details-container h1 {
+  font-size: 32px;
+  color: #a3c4ff;
+  border-bottom: 2px solid #1e3a5f;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+#course-details-container p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: justify;
+  color: #e0e0e0;
+}
+
+/* NEW: Home Button Style for Courses Page */
+#back-to-home-btn {
+  background-color: #4fa3ff;
+  color: #0b1a33;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#back-to-home-btn:hover {
+  background-color: #a3c4ff;
+  transform: translateY(-2px);
+}
+
+/* === Slider, Menu Buttons, Marquee (Standard, Unchanged) === */
+.slider {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.slider img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1.5s ease-in-out;
+  animation: continuousZoom 35s linear infinite;
+}
+
+.slider img.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+@keyframes continuousZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 35px;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #1e3a5f1a;
+}
+
+/* UPDATED STYLE FOR TRAINING CAPTION (RIGHT ARROW SHAPE) */
+.training-caption {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  align-self: center;
+  flex-shrink: 0;
+  margin-right: 20px;
+  text-transform: uppercase;
+  background-color: #041c4e; /* Deeper Navy Blue Background */
+
+  /* Adjusted Padding: Increased the right padding to compensate for the removed corner 
+       and added the same padding to the left for vertical centering.
+    */
+  padding: 12px 30px 12px 18px;
+
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5), 0 4px 10px rgba(0, 0, 0, 0.4);
+
+  /* --- CRUCIAL FIX HERE ---
+       Defines a Pentagon: 
+       1. Top-left (0% 0%)
+       2. Top-right before the tip (85% 0%)
+       3. Right tip (100% 50%)
+       4. Bottom-right before the tip (85% 100%)
+       5. Bottom-left (0% 100%)
+       
+       Using 85% instead of 93% makes the arrow more pronounced.
+    */
+  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+
+  transition: background-color 0.3s;
+  cursor: default; /* Set on the main element for better readability */
+}
+
+.training-caption:hover {
+  background-color: #1e3a5f; /* Hover effect with a slightly lighter navy */
+}
+/* END UPDATED STYLE */
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown button {
+  background: linear-gradient(145deg, #0b1a33, #142850);
+  color: #a3c4ff;
+  border: 1px solid #1e3a5f;
+  padding: 16px 36px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown button:hover {
+  background: linear-gradient(145deg, #1e3a5f, #2a4d7a);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* UPDATED .dropdown-content for drop-up and animation */
+.dropdown-content {
+  display: flex; /* Keep it flex */
+  position: absolute;
+  background-color: #0b1a33;
+  min-width: 200px;
+  bottom: 60px;
+  left: 0;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  z-index: 11;
+  overflow: hidden;
+  border: 1px solid #1e3a5f;
+  flex-direction: column;
+  visibility: hidden; /* Start hidden */
+  opacity: 0; /* Start invisible */
+  transform: translateY(
+    10px
+  ); /* Start 10px below its final position (to slide up) */
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+  visibility: visible;
+  opacity: 1; /* Fade in */
+  transform: translateY(0); /* Slide to final position */
+}
+
+.dropdown-content a {
+  color: #a3c4ff;
+  padding: 14px 18px;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {
+  background-color: #1e3a5f;
+  color: #fff;
+}
+
+/* The previous block controls the hover and animation, this line is redundant but was in your file. I will remove it for clean code, or keep it as instructed not to change anything else unless necessary. Since the animation block handles display, I'll keep it for now. */
+/* .dropdown:hover .dropdown-content {
+display: block;
+} */
+
+.marquee-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  background-color: #0b1a33;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 60px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.marquee-label {
+  flex-shrink: 0;
+  background-color: #1e3a5f;
+  color: #a3c4ff;
+  font-weight: bold;
+  padding: 0 25px;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid #0b1a33;
+}
+
+.marquee-label span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arrow {
+  font-size: 22px;
+  color: #4fa3ff;
+  transform: translateY(1px);
+}
+
+.marquee-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-text {
+  position: absolute;
+  white-space: nowrap;
+  animation: scrollText 30s linear infinite;
+  color: #a3c4ff;
+  font-size: 18px;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* ============================================= */
+/* === Right Bio Buttons (SCROLLING) === */
+/* ============================================= */
+.right-buttons {
+  position: absolute;
+  top: 300px;
+  right: 0;
+  transform: none;
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+  z-index: 50;
+  margin-right: 30px;
+}
+
+.bio-button-wrapper {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+
+.bio-button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #1e3a5f, #142850);
+  border: 2px solid #4fa3ff;
+  color: #e0e0e0;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-align: center;
+  line-height: 1.3;
+  padding: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4),
+    inset 0 0 10px rgba(79, 163, 255, 0.2);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.bio-button:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 30px #4fa3ff, 0 0 60px #4fa3ff80, inset 0 0 15px #a3c4ff;
+  border-color: #a3c4ff;
+  color: #ffffff;
+}
+
+/* ============================================= */
+/* === Bio-Data Pop-up Styles (Unchanged) === */
+/* ============================================= */
+.bio-data {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  right: 125px;
+  top: 50%;
+  transform: translateY(-50%) translateX(10px);
+  padding: 18px 20px;
+  width: 280px;
+  background-color: #142850;
+  color: #e0e0e0;
+  border: 1px solid #4fa3ff;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7), 0 0 15px rgba(79, 163, 255, 0.4);
+  z-index: 60;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out,
+    transform 0.3s ease-out;
+  text-align: center;
+}
+
+.bio-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 10px auto;
+  border: 3px solid #a3c4ff;
+  display: block;
+  cursor: pointer;
+}
+
+.bio-data h2 {
+  margin: 0 0 5px 0;
+  color: #fff;
+  font-size: 20px;
+}
+
+.bio-data h3 {
+  margin: 0 0 15px 0;
+  color: #a3c4ff;
+  font-size: 14px;
+  font-weight: normal;
+  border-bottom: 1px solid #1e3a5f;
+  padding-bottom: 8px;
+}
+
+.bio-data p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.bio-button-wrapper:hover .bio-data {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ============================================= */
+/* === Image Modal/Overlay CSS (For Charts/Bios) === */
+/* ============================================= */
+#imageModal {
+  display: none;
+  position: fixed;
+  z-index: 99; /* Lower than contentModal */
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  max-height: 90%;
+  object-fit: contain;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #a3c4ff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ================================================= */
+/* === NEW: Content Modal Styles (Full-Screen Pop-up) === */
+/* ================================================= */
+
+#contentModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  /* *** CHANGE THIS LINE *** We are changing the background-color from rgba(0,0,0,0.95) 
+    to rgba(0,0,0,0.7) for a more transparent look.
+*/
+  background-color: rgba(0, 0, 0, 0.7); /* Adjusted for more transparency */
+  padding: 50px 0;
+  animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content-article {
+  margin: 20px auto;
+  max-width: 900px; /* Max width for readability */
+  padding: 40px;
+  background-color: #112240; /* Darker blue background */
+  border-radius: 8px;
+  color: #e0e0e0;
+  border: 2px solid #4fa3ff;
+}
+
+.modal-content-article h1 {
+  color: #a3c4ff;
+  font-size: 36px;
+  border-bottom: 2px solid #1e3a5f;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+.modal-content-article p {
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.modal-content-article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 6px;
+  border: 1px solid #1e3a5f;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn-article {
+  position: fixed; /* Fixed position */
+  top: 20px;
+  right: 30px;
+  color: #a3c4ff;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 1001; /* Above the content modal */
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 15px;
+  border-radius: 5px;
+}
+
+.close-btn-article:hover,
+.close-btn-article:focus {
+  color: #fff;
+  background: #4fa3ff;
+}
+
+/* ============================================= */
+/* === Course Footer Style === */
+/* ============================================= */
+#global-footer {
+  /* Layout using Flexbox for alignment */
+  display: flex; /* Enables flexible alignment */
+  justify-content: space-between; /* Pushes logo and content to opposite ends */
+  align-items: center; /* Vertically centers content */
+
+  /* Box Model and Spacing (Adjusted) */
+  margin: 40px auto;
+  width: calc(100% - 160px);
+  max-width: 1500px;
+  padding: 20px 40px; /* Padding now controls internal spacing */
+
+  /* Appearance */
+  background-color: #05142a; /* Used a dark color for better contrast */
+  border-radius: 8px;
+  border-top: 2px solid #4fa3ff;
+  font-size: 14px;
+  color: #a3c4ff;
+}
+
+/* Style the main content area to take up space */
+#global-footer .footer-content {
+  /* Center the text within the footer */
+  flex-grow: 1; /* Allows the content to expand and push the logo left */
+  text-align: center;
+}
+
+/* Style the logo */
+.footer-logo {
+  height: 70px; /* Set a specific height */
+  width: auto;
+  margin-left: 20px;
+  margin-right: 50px; /* Space between the logo and the text */
+  /* Ensures the logo doesn't disappear if content is centered */
+}
+
+/* Ensure the paragraph remains clean */
+#global-footer p {
+  margin: 0;
+}
+
+/* === NEW CSS FOR HIGHLIGHTS SECTION (2 COLUMNS) === */
+.highlights-box {
+  display: flex;
+  max-width: 1415px;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 30px;
+  margin-top: 20px;
+}
+
+.highlights-column {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #142850; /* Slightly darker background for contrast */
+  border: 1px solid #1e3a5f;
+}
+
+.column-header h3 {
+  color: #4fa3ff;
+  font-size: 24px;
+  border-bottom: 2px solid #1e3a5f;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* --- Left Column (Tabs) --- */
+.tabs-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.highlight-tab {
+  flex: 1 1 45%; /* Allow two buttons per row */
+  background-color: #0b1a33;
+  color: #a3c4ff;
+  border: 1px solid #1e3a5f;
+  padding: 12px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.highlight-tab:hover:not(.active) {
+  background-color: #1e3a5f;
+  color: #fff;
+}
+
+.highlight-tab.active {
+  background-color: #4fa3ff;
+  color: #0b1a33;
+  border-color: #4fa3ff;
+  box-shadow: 0 0 10px rgba(79, 163, 255, 0.6);
+}
+
+.highlight-content h4 {
+  font-size: 20px;
+  color: #ffffff;
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #1e3a5f;
+}
+
+.highlight-content p {
+  line-height: 1.6;
+  font-size: 15px;
+  text-align: left;
+}
+
+/* Add this to your existing CSS styles */
+
+.read-more-btn {
+  background-color: #4fa3ff; /* Primary Blue */
+  color: #0b1a33;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+  display: block; /* Makes the button take the full width below the text */
+  width: fit-content; /* Adjusts width to content size */
+  margin-left: auto; /* Align to the right for a clean look */
+}
+
+.read-more-btn:hover {
+  background-color: #79bbff; /* Lighter blue on hover */
+}
+
+/* --- Right Column (Event Slider) --- */
+.event-slider {
+  position: relative;
+  height: 350px; /* Fixed height for the event slider */
+  overflow: hidden;
+  border-radius: 8px;
+  border: 3px solid #0b1a33;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.event-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.event-slide.active {
+  opacity: 1;
+}
+
+.event-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+  color: #a3c4ff;
+  padding: 15px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.event-title:hover {
+  background-color: rgba(79, 163, 255, 0.8);
+  color: #0b1a33;
+}
+
+/* Prevents clicks on the entire slide area when it's not active */
+.event-slide:not(.active) {
+  pointer-events: none;
+}
+
+/* This specifically prevents clicking the title element when it's not active,
+   which is the element with the onclick event. */
+.event-slide:not(.active) .event-title {
+  pointer-events: none;
+}
+/* Add this to your existing CSS */
+
+/* --- Event Slider Controls --- */
+.prev-event,
+.next-event {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+  border: none;
+  z-index: 10; /* Ensure buttons are above slides */
+}
+
+.next-event {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev-event {
+  left: 0;
+}
+
+.prev-event:hover,
+.next-event:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+/* Replace your existing #global-footer CSS with this block */
+#global-footer {
+  /* Layout and Spacing */
+  width: 100%;
+  padding: 25px 0; /* Increased vertical padding for better spacing */
+  box-sizing: border-box;
+
+  /* Colors and Background */
+  background-color: #05142a; /* Slightly darker navy than your primary background for contrast */
+  color: #a0a0a0; /* Soft gray text for readability */
+
+  /* Separator Line (Subtle Gradient) */
+  border-top: 1px solid #1a3e66; /* Thin, dark blue line for separation */
+  /* You could use a subtle box shadow for a 'lifted' effect */
+  /* box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); */
+
+  /* Text and Typography */
+  text-align: center;
+  font-size: 13px;
+  font-family: Arial, sans-serif; /* Ensuring a standard readable font */
+}
+
+/* Styling for text inside the footer */
+#global-footer p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Styling the links (Disclaimer/Privacy Policy) */
+#global-footer a {
+  color: #a0a0a0; /* Links match the text color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin: 0 5px; /* Spacing between links */
+}
+
+#global-footer a:hover {
+  color: #4fa3ff; /* Links highlight with the primary blue on hover */
+  text-decoration: underline;
+}
+/* Styling for the overall Queries page content */
+#course-content {
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Styling for each individual contact box */
+.contact-block {
+  border: 1px solid #1a3e66; /* Subtle navy border */
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px; /* Space between contact sections */
+  background-color: #f7f9fc; /* Very light background for contrast */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+}
+
+/* Styling for the section headers (e.g., 'Telephone Exchange') */
+.contact-block h2 {
+  color: #0b1a33; /* Dark navy heading color */
+  border-bottom: 2px solid #4fa3ff; /* Primary blue underline */
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.contact-block p {
+  color: #030507;
+  font-weight: 800;
+}
+
+/* Styling for contact details (label/value pairs) */
+.contact-detail-row {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 0.95em;
+}
+
+.contact-label {
+  font-weight: bold;
+  color: #333;
+  min-width: 150px; /* Fixed width for alignment */
+  padding-right: 10px;
+}
+
+.contact-value {
+  color: #0b1a33;
+  flex-grow: 1;
+}
+
+/* Specific styling for the join navy link */
+.join-navy-link {
+  margin-top: 25px;
+  padding: 15px;
+  background-color: #d8edff; /* Light blue background */
+  border-left: 5px solid #4fa3ff; /* Accent bar */
+  border-radius: 4px;
+  font-size: 1.1em;
+}
+
+.join-navy-link a {
+  color: #0b1a33;
+  font-weight: 600;
+}
+/* Styling for the overall Visit INA page content */
+#course-content {
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* Styling for each category card (Schools, Colleges, etc.) */
+.visit-category-card {
+  border: 1px solid #1a3e66; /* Subtle navy border */
+  border-radius: 8px;
+  margin-bottom: 30px; /* Space between cards */
+  background-color: #ffffff; /* White background for the card body */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Clear shadow for depth */
+  overflow: hidden; /* Contains inner floats/margins */
+}
+
+/* Header for the card (Category Name) */
+.card-header {
+  background-color: #0b1a33; /* Dark navy background */
+  color: #ffffff;
+  padding: 15px 20px;
+  font-size: 1.3em;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Container for individual details within the card */
+.card-details-grid {
+  padding: 0 20px 10px 20px;
+  display: grid;
+  grid-template-columns: 200px 1fr; /* Two columns: Label (200px) and Value (rest) */
+  gap: 10px 0; /* Vertical gap between rows */
+}
+
+/* Styling for the labels (e.g., POINT OF CONTACT) */
+.detail-label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Styling for the values */
+.detail-value {
+  color: #0b1a33;
+}
+
+/* Specific styling for the visit programme section */
+.visit-programme-section {
+  padding: 15px 20px 20px 20px;
+  margin-top: 15px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.visit-programme-section h4 {
+  color: #4fa3ff; /* Primary blue heading */
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+.visit-programme-section ul {
+  list-style-type: square;
+  padding-left: 20px;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+/* Styling for notes and warnings */
+.important-notes {
+  background-color: #424242; /* Light yellow background for warnings */
+  border-left: 5px solid #ffcc00; /* Yellow accent bar */
+  padding: 15px;
+  margin: 20px 0;
+  font-size: 0.9em;
+  color: #5c5c5c;
+}
+/* General container reset for the reach INA page */
+.reach-ina-container {
+  padding: 20px;
+}
+
+/* Styling for each travel mode section (By Train, By Air, By Road) */
+.travel-mode-section {
+  margin-bottom: 30px;
+  padding: 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden; /* Contains the header and content */
+  background-color: #49373750;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Header/Title for the mode of transport (e.g., By Train) */
+.travel-mode-header {
+  background-color: #0b1a33; /* Dark Navy */
+  color: #ffffff;
+  padding: 15px 20px;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Content area within the section */
+.travel-mode-content {
+  padding: 20px;
+  font-size: 1em;
+  color: #333;
+  line-height: 1.7;
+}
+
+/* Styling for key points (used for airports/stations) */
+.key-point {
+  margin-top: 15px;
+  padding-left: 10px;
+  border-left: 3px solid #4fa3ff; /* Primary blue accent bar */
+}
+
+.key-point strong {
+  color: #0b1a33;
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Highlighting specific names/stations/exceptions */
+.highlight-text {
+  font-weight: bold;
+  color: #4fa3ff;
+}

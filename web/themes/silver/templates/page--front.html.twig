@@ -1,0 +1,70 @@
+<header>
+    <!--<img src="giphy.gif" alt="Flying Indian Flag" class="flying-flag left-flag">-->
+    <img src="https://my-drupal-site.ddev.site/sites/default/files/2025-10/logo.png" alt="Website Logo">
+    <img src="https://my-drupal-site.ddev.site/sites/default/files/2025-10/giphy.gif" alt="Flying Indian Flag" class="flying-flag right-flag">
+</header>
+
+{% if page.vertical %}
+
+    {{ page.vertical }}
+
+{% endif %}
+
+<div class="main-box" id="main-landing-box">
+    {{ page.slider }}
+    {{ page.right_buttons }}
+    {{ page.button_container }}
+    {{ page.whats_new }}
+    {# {{ page.event_slider }} #}
+    
+</div>
+
+<div class="main-box highlights-box" id="highlights-section">
+
+    <div class="highlights-column left-column">
+        <div class="column-header">
+            <h3>Indian Naval Academy</h3>
+        </div>
+        <div class="tabs-container">
+            <button class="highlight-tab" onclick="showHighlight('Campus', this)">INA Campus</button>
+            <button class="highlight-tab" onclick="showHighlight('Vision of INA', this)">Vision of INA</button>
+            <button class="highlight-tab" onclick="showHighlight('History of INA', this)">History of INA</button>
+            <button class="highlight-tab active" onclick="showHighlight('Support Organisations', this)">Support
+                Organisations</button>
+        </div>
+
+        <div class="highlight-content" id="highlight-content-area">
+            <h4 id="highlight-title">Support Organisations</h4>
+            <p id="highlight-paragraph">'Even tough guys need first aid'. With an aim of providing premier medical
+                services, INHS Navjivani was established at the Indian Naval Academy. The medical services at the Indian
+                Naval Academy are of world class standards and their round the clock service goes a long way in ensuring
+                quality medical treatment. The hospital staff consists of Medical officers and nursing staff from
+                Military Nursing Services.</p>
+            <button class="read-more-btn"
+                onclick="openContentModal(document.getElementById('highlight-title').textContent); return false;">Read
+                More</button>
+        </div>
+    </div>
+    <div class="highlights-column right-column">
+        <div class="event-slider" id="event-slider">
+            <button class="prev-event" onclick="changeEventSlide(-1)">&#10094;</button>
+            <button class="next-event" onclick="changeEventSlide(1)">&#10095;</button>
+        
+            <div id="event-slides-container">
+                <!-- Slides will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+  
+</div>
+
+
+
+
+
+<div id="course-details-container">
+    <button id="back-to-home-btn" onclick="showMainLandingBox()"><i class="fas fa-home"></i> Back to Home </button>
+    <h1 id="course-title"></h1>
+    <div id="course-content"></div>
+</div>

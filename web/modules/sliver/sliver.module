@@ -1,0 +1,111 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for sliver module.
+ */
+
+use Drupal\Core\Template\Attribute;
+use Drupal\file\Entity\File;
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Prepares variables for views-style-sliver-slider.html.twig template.
+ */
+function template_preprocess_views_style_sliver_slider(array &$variables): void {
+ $view = $variables['view'];
+  $options = $view->style_plugin->options;
+  $i = 0;
+
+  $variables['default_row_class'] = $options['default_row_class'];
+  foreach ($variables['rows'] as $id => $row) {
+    $i++;
+    $field_items = $row['#row']->_entity->get('field_image_slider');
+    foreach ($field_items as $item) {
+      $file_id = $item->target_id;
+    }
+    $file = File::load($file_id);
+    $uri = $file->getFileUri();
+    $realpath = \Drupal::service('file_system')->realpath($uri);
+     
+
+    $path = str_replace($_SERVER['DOCUMENT_ROOT'] . '/', '', $realpath); 
+
+
+
+
+
+    $variables['rows'][$id] = [
+      'content' => $row,
+      'attributes' => new Attribute(),
+    ];
+
+    
+    $variables['rows'][$id]['title'] = $row['#row']->_entity->getTitle();
+    $variables['rows'][$id]['url'] = $path;
+    $variables['rows'][$id]['id'] = 'item item-'.$i;
+
+    if ($row_class = $view->style_plugin->getRowClass($id)) {
+      $variables['rows'][$id]['attributes']->addClass($row_class);
+    }
+  }
+}
+
+
+
+/**
+ * Prepares variables for views-style-sliver-what-s-new.html.twig template.
+ */
+function template_preprocess_views_style_sliver_what_s_new(array &$variables): void {
+  $view = $variables['view'];
+  $options = $view->style_plugin->options;
+
+  $variables['default_row_class'] = $options['default_row_class'];
+  foreach ($variables['rows'] as $id => $row) {
+    $variables['rows'][$id]['title'] = $row['#row']->_entity->getTitle();
+  }
+}
+
+
+
+/**
+ * Prepares variables for views-style-sliver-event-slider.html.twig template.
+ */
+function template_preprocess_views_style_sliver_event_slider(array &$variables): void {
+  $view = $variables['view'];
+  $options = $view->style_plugin->options;
+  $i = 0;
+
+  $variables['default_row_class'] = $options['default_row_class'];
+  foreach ($variables['rows'] as $id => $row) {
+    $i++;
+    $field_items = $row['#row']->_entity->get('field_image_event');
+    foreach ($field_items as $item) {
+      $file_id = $item->target_id;
+    }
+    $file = File::load($file_id);
+    $uri = $file->getFileUri();
+    $realpath = \Drupal::service('file_system')->realpath($uri);
+     
+
+    $path = str_replace($_SERVER['DOCUMENT_ROOT'] . '/', '', $realpath); 
+
+
+
+
+
+    $variables['rows'][$id] = [
+      'content' => $row,
+      'attributes' => new Attribute(),
+    ];
+
+    
+    $variables['rows'][$id]['title'] = $row['#row']->_entity->getTitle();
+    $variables['rows'][$id]['url'] = $path;
+    $variables['rows'][$id]['id'] = 'item item-'.$i;
+
+    if ($row_class = $view->style_plugin->getRowClass($id)) {
+      $variables['rows'][$id]['attributes']->addClass($row_class);
+    }
+  }
+}

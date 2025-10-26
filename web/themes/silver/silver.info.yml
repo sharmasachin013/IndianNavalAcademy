@@ -1,0 +1,26 @@
+name: silver
+type: theme
+base theme: claro
+description: A flexible theme with a responsive, mobile-first layout.
+package: Custom
+core_version_requirement: ^10 || ^11
+libraries:
+  - silver/global
+regions:
+  header: "Header"
+  whats_new: "What's New"
+  primary_menu: "Primary menu"
+  vertical: "Vertical"
+  event_slider: "Event slider"
+  right_buttons: "Right buttons"
+  button_container: "Button container"
+  slider: "Slider"
+  secondary_menu: "Secondary menu"
+  page_top: "Page top"
+  page_bottom: "Page bottom"
+  featured: "Featured"
+  breadcrumb: "Breadcrumb"
+  content: "Content"
+  sidebar_first: "Sidebar first"
+  sidebar_second: "Sidebar second"
+  footer: "Footer"
