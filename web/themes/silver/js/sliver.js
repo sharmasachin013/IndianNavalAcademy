@@ -565,3 +565,250 @@ function showNextEventSlide() {
 }
 
 
+ function showCourseDetails(title) {
+    const mainBox = document.getElementById('main-landing-box');
+    const highlightsSection = document.getElementById('highlights-section');
+    const courseContainer = document.getElementById('course-details-container');
+    const courseTitle = document.getElementById('course-title');
+    const courseContent = document.getElementById('course-content');
+    // REMOVED: const courseFooter = document.getElementById('course-footer');
+    
+    // 1. Initiate fade-out for the main landing box AND highlights section
+    mainBox.style.opacity = '0';
+    highlightsSection.style.opacity = '0';
+    
+    setTimeout(() => {
+        // 2. Hide main box and highlights section after fade
+        mainBox.style.display = 'none';
+        highlightsSection.style.display = 'none'; 
+        
+        courseTitle.textContent = title;
+        courseContent.innerHTML = getCourseContent(title);
+        
+        // *** CRUCIAL LINE RETAINED ***
+        courseContainer.style.opacity = '0'; // Ensure it starts invisible for fade-in
+        courseContainer.style.display = 'block'; // This shows the course details!
+        
+        // REMOVED: courseFooter.style.display = 'block'; // Footer is now always visible
+        
+        // 3. Trigger fade-in for the course container
+        setTimeout(() => {
+            courseContainer.style.opacity = '1';
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top for best view
+        }, 50); 
+        
+    }, 500); // Wait for the 0.5s transition to complete
+ }
+  
+  function getContactContent(key) {
+      const contactContentMap = {
+          'Queries': `
+            <div class="contact-block">
+              <h2>Telephone Exchange Naval Station Ezhimala</h2>
+              <p style="color: #030507;">Indian Naval Academy, Ezhimala PO, Kannur 670310</p>
+              <div class="contact-detail-row"><div class="contact-label">Phone:</div><div class="contact-value">04985-225999, 225444</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Fax:</div><div class="contact-value">04985-223855</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Mail Id:</div><div class="contact-value">ina(at)navy.gov.in</div></div>
+            </div>
+
+            <div class="contact-block">
+              <h2>Queries related to the Academic Curriculum</h2>
+              <div class="contact-detail-row"><div class="contact-label">Contact:</div><div class="contact-value">Commodore Sanjay Nirmal, Registrar</div></div>
+              
+              <div class="contact-detail-row"><div class="contact-label">Phone:</div><div class="contact-value">04985-225194</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Fax:</div><div class="contact-value">04985-223855</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Email Id:</div><div class="contact-value">ina(at)navy.gov.in</div></div>
+            </div>
+
+            <div class="contact-block">
+              <h2>Queries related to Training activities</h2>
+              <div class="contact-detail-row"><div class="contact-label">Contact:</div><div class="contact-value">Commodore Manmohan Singh, Principal Director (Training)</div></div>
+              
+              <div class="contact-detail-row"><div class="contact-label">Phone:</div><div class="contact-value">04985-225340</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Fax:</div><div class="contact-value">04985-223855</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Mail Id:</div><div class="contact-value">ina(at)navy.gov.in</div></div>
+            </div>
+
+            <div class="contact-block">
+              <h2>RTI related enquiries</h2>
+              <div class="contact-detail-row"><div class="contact-label">Contact:</div><div class="contact-value">Lt Gautam Jha, PIO</div></div>
+              
+              <div class="contact-detail-row"><div class="contact-label">Phone:</div><div class="contact-value">04985-225194</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Fax:</div><div class="contact-value">04985-223855</div></div>
+              <div class="contact-detail-row"><div class="contact-label">Email Id:</div><div class="contact-value">ina(at)navy.gov.in</div></div>
+            </div>
+
+            <div class="join-navy-link">
+              <div class="contact-label">Queries related to Join Indian Navy as an Officer:</div>
+              <div class="contact-value"><a href="http://www.joinindiannavy.gov.in/" target="_blank">Visit: www.joinindiannavy.gov.in</a></div>
+            </div>
+          `,
+          'How to Visit INA': `
+            <div class="visit-category-card">
+              <div class="card-header">SCHOOLS/ EDUCATIONAL INSTITUTIONS (5th to 8th STD)</div>
+                <div class="card-details-grid">
+                    <div class="detail-label">POINT OF CONTACT:</div><div class="detail-value">EDUCATION OFFICER, INS ZAMORIN</div>
+                    <div class="detail-label">PHONE NUMBER:</div><div class="detail-value">04985-226067 / 04985-225314 (FAX)</div>
+                    <div class="detail-label">EMAIL:</div><div class="detail-value">ina@navy.gov.in</div>
+                    <div class="detail-label">DATES PERMITTED:</div><div class="detail-value">1st & 3rd SAT of every month; 26 JAN/ 15 AUG/ Last Monday & Wednesday every May & November for POP Reviews</div>
+                    <div class="detail-label">DURATION:</div><div class="detail-value">1030-1300 HRS (or as per parade timings on ceremonial occasions)</div>
+                    <div class="detail-label">DOCUMENTS REQD:</div><div class="detail-value">NAME/AGE/AADHAR/PHONE NO (NOK in case of students)</div>
+                    <div class="detail-label">VEHICLES:</div><div class="detail-value">OWN VEHICLE/DRIVER (with all required documents)</div>
+                    <div class="detail-label">BROAD VISIT PROGRAMME:</div><div class="detail-value">Visit Windshield Tour of Station(MULLA AQUATICS – PARADE GROUND – DRILL SHED - CHOLA STADIUM – BAFFLE RANGE – EQUITATION CENTRE)</div>
+                    <div class="detail-label">FOOD & BEVERAGES:</div><div class="detail-value">Not permitted/Not provided (Water bottles & light snacks allowed).</div>
+                </div>
+          
+                <div class="important-notes">
+                    <p>*** PERSONNEL WITH KNOWN MEDICAL CONDITIONS are not to be brought without prior approval.</p>
+                    <p>*** REQUESTS are to be made well in time (at least THREE WEEKS prior). Approval is at the behest of INA.</p>
+                    <p>*** Requests for CEREMONIAL OCCASIONS (26 JAN/ 15 AUG/ POPs) are to be made at least TWO MONTHS in advance.</p>
+                    <p>*** RESTRICTED PHOTOGRAPHY only in general areas. Security facilities are not permitted to be photographed.</p>
+                </div>
+            </div>
+
+            <div class="visit-category-card">
+              <div class="card-header">SCHOOLS/ EDUCATIONAL INSTITUTIONS (9th STD AND ABOVE)</div>
+              <div class="card-details-grid">
+                  <div class="detail-label">POINT OF CONTACT:</div><div class="detail-value">ACADEMY COORDINATOR, INA</div>
+                  <div class="detail-label">PHONE NUMBER:</div><div class="detail-value">04985-225611 / 04985-223855 (FAX)</div>
+                  <div class="detail-label">EMAIL:</div><div class="detail-value">ina@navy.gov.in</div>
+                  <div class="detail-label">DATES PERMITTED:</div><div class="detail-value">1st & 3rd SAT of every month; 26 JAN/ 15 AUG/ Last Monday & Wednesday every May & November for POP Reviews</div>
+                  <div class="detail-label">DURATION:</div><div class="detail-value">1030-1300 HRS (or as per parade timings on ceremonial occasions)</div>
+                  <div class="detail-label">DOCUMENTS REQD:</div><div class="detail-value">NAME/AGE/AADHAR/PHONE NO (NOK in case of students)</div>
+                  <div class="detail-label">VEHICLES:</div><div class="detail-value">OWN VEHICLE/DRIVER (with all required documents)</div>
+                  <div class="detail-label">BROAD VISIT PROGRAMME:</div><div class="detail-value">INA MOVIE IN AUDITORIUM FOLLOWED BY TOUR OF TRAINING FACILITIES EDUCATIONAL BLOCKS, LIBRARY, SPORTS FACILITIES, ETTINA and CADETS MESS</div>
+              </div>
+              <div class="important-notes">
+                  <p>*** PERSONNEL WITH KNOWN MEDICAL CONDITIONS are not to be brought without prior approval.</p>
+                  <p>*** REQUESTS for visits on other days WILL NOT BE ENTERTAINED. Requests are to be made at least THREE WEEKS prior.</p>
+                  <p>*** RESTRICTED PHOTOGRAPHY only in general areas. Security facilities are not permitted to be photographed.</p>
+              </div>
+          </div>
+
+          <div class="visit-category-card">
+              <div class="card-header">MILITARY / AFFILIATED INSTITUTIONS/ NCC UNITS</div>
+              <div class="card-details-grid">
+                  <div class="detail-label">POINT OF CONTACT:</div><div class="detail-value">ACADEMY COORDINATOR, INA</div>
+                  <div class="detail-label">PHONE NUMBER:</div><div class="detail-value">04985-225611 / 04985-223855 (FAX)</div>
+                  <div class="detail-label">EMAIL:</div><div class="detail-value">ina@navy.gov.in</div>
+                  <div class="detail-label">DURATION:</div><div class="detail-value">UPTO 3 DAYS</div>
+                  <div class="detail-label">SUITABILITY OF DATES:</div><div class="detail-value">To be checked with POC</div>
+                  <div class="detail-label">BOARDING & FOOD:</div><div class="detail-value">Will be provided on CHARGE BASIS</div>
+                  <div class="detail-label">DOCUMENTS REQD:</div><div class="detail-value">NAME/AGE/AADHAR/PHONE NO (NOK in case of students)</div>
+                  <div class="detail-label">VEHICLES:</div><div class="detail-value">May be arranged on request on CHARGEABLE BASIS</div>
+                  <div class="detail-label">BROAD VISIT PROGRAMME:</div><div class="detail-value">DAY 1 : ARRIVAL/ INA MOVIE AND VISIT OF INA FACILTIES<br>DAY 2 : SPORTS/ RECREATIONAL ACTIVITIES/ MEET EX-SCHOOL STUDENTS/ DEPARTURE</div>
+              </div>
+              <div class="important-notes">
+                  <p>*** REQUESTS are to be made at least TWO MONTHS in advance.</p>
+                  <p>*** Only THREE SCHOOLS would be allowed to stay at Academy during POP due to accommodation constraints.</p>
+                  <p>*** RESTRICTED PHOTOGRAPHY only in general areas. Security facilities are not permitted to be photographed.</p>
+                  <p>*** RESTRICTED PHOTOGRAPHY ONLY IN GENERAL AREAS. SECURITY FACILITIES ARE NOT PERMITTED TO BE PHOTOGRAPHED</p>
+              </div>
+          </div>
+    
+          <div class="visit-category-card">
+              <div class="card-header">COLLEGES/ CENTRAL GOVT AFFILIATED INSTITUTES</div>
+              <div class="card-details-grid">
+                  <div class="detail-label">POINT OF CONTACT:</div><div class="detail-value">ACADEMY COORDINATOR, INA</div>
+                  <div class="detail-label">PHONE NUMBER:</div><div class="detail-value">04985-225611 / 04985-223855 (FAX)</div>
+                  <div class="detail-label">EMAIL:</div><div class="detail-value">ina@navy.gov.in</div>
+                  <div class="detail-label">DATES PERMITTED:</div><div class="detail-value">1st & 3rd SAT of every month; 26 JAN/ 15 AUG/ Last Monday & Wednesday every May & November for POP Reviews</div>
+                  <div class="detail-label">DURATION:</div><div class="detail-value">1030-1300 HRS (or as per parade timings on ceremonial occasions)</div>
+                  <div class="detail-label">DOCUMENTS REQD:</div><div class="detail-value">NAME/AGE/AADHAR/PHONE NO (NOK in case of students)</div>
+                  <div class="detail-label">VEHICLES:</div><div class="detail-value">OWN VEHICLE/DRIVER (with all required documents)</div>
+                  <div class="detail-label">BROAD VISIT PROGRAMME:</div><div class="detail-value">INA MOVIE IN AUDITORIUM FOLLOWED BY TOUR OF TRAINING FACILITIES EDUCATIONAL BLOCKS, LIBRARY, SPORTS FACILITIES, WATERMANSHIP AREA and CADETS MESS</div>
+              </div>
+              <div class="important-notes">
+                  <p>*** PERSONNEL WITH KNOWN MEDICAL CONDITIONS ARE NOT TO BE BROUGHT WITHOUT PRIOR APPROVAL</P>
+                  <p>*** VISIT is limited to **80 PAX** per institution. Visit on any day restricted to TWO institutions on first come basis. Max TWO BUSES permitted per institute inside INA.</p>
+                  <p>*** REQUESTS for visits on other days WILL NOT BE ENTERTAINED. Requests are to be made at least THREE WEEKS prior.</p>
+                  <p>*** RESTRICTED PHOTOGRAPHY only in general areas. Security facilities are not permitted to be photographed.</p>
+              </div>
+          </div>
+    
+          <div class="visit-category-card">
+              <div class="card-header">VETERANS</div>
+              <div class="card-details-grid">
+                  <div class="detail-label">POINT OF CONTACT:</div><div class="detail-value">INS ZAMORIN</div>
+                  <div class="detail-label">PHONE NUMBER:</div><div class="detail-value">04985-226067 / 04985-225314 (FAX)</div>
+                  <div class="detail-label">EMAIL:</div><div class="detail-value">N/A</div>
+                  <div class="detail-label">DATES PERMITTED:</div><div class="detail-value">3rd SATURDAY of every month</div>
+                  <div class="detail-label">DURATION:</div><div class="detail-value">1030-1300 HRS ONLY</div>
+                  <div class="detail-label">DOCUMENTS REQD:</div><div class="detail-value">NAME/AGE/AADHAR/PHONE NO</div>
+                  <div class="detail-label">FOOD & BEVERAGES:</div><div class="detail-value">Not permitted/Not provided (Water bottles & light snacks allowed)</div>
+                  <div class="detail-label">BROAD VISIT PROGRAMME:</div><div class="detail-value">(VISIT WILL COMMENCE AND TERMINATE AT PAYYANUR GATE) INA MOVIE IN AUDITORIUM FOLLOWED BY TOUR OF TRAINING FACILITIES EDUCATIONAL BLOCKS, LIBRARY, SPORTS FACILITIES, WATERMANSHIP AREA and CADETS MESS</div>
+              </div>
+              <div class="important-notes">
+                  <p>*** REGISTRATION FOR VISIT TO BE MADE LATEST BY 10th OF THE MONTH. REQUESTS RECEIVED AFTER 10th WILL BE CONSIDERED ONLY FOR THE NEXT MONTH.</p>
+                  <p>*** VISIT WILL BE RESTRICTED TO 45 PERSONNEL ON FIRST COME BASIS. TOUR IS SUBJECT TO ATLEAST 10 PERSONNEL REGISTERING FOR THE VISIT</p>
+                  <p>*** PERSONNEL WITH KNOWN MEDICAL CONDITIONS ARE NOT TO BE BROUGHT WITHOUT PRIOR APPROVAL</p>
+                  <p>*** RESTRICTED PHOTOGRAPHY ONLY IN GENERAL AREAS. SECURITY FACILITIES ARE NOT PERMITTED TO BE PHOTOGRAPHED</p>
+              </div>
+          </div>
+          `,
+          'How to Reach INA': `
+          <div class="reach-ina-container">
+            <div class="travel-mode-section">
+                <h3 class="travel-mode-header">By Train 🚆</h3>
+                <div class="travel-mode-content">
+                    <p>The INA is well connected by rail links. The nearest railway station is Payyanur, a town located at a distance of approximately Six kilometers from the INA. A broad-gauge rail-line links Payyanur to Mumbai and a number of other major cities in Western, Central and Northern India via the Konkan Railway. All trains on the Konkan Railway route, except the ‘Delhi-Thiruvananthapuram Rajdhani Express’, the ‘Chandigarh-Thiruvananthapuram Sampark-Kranti Express’, the ‘Jodhpur-Thiruvananthapuram Jodhpur Express’, and, the ‘Jaipur- Ernakulam Jaipur Maru-Sagar Express’, halt at Payyanur. However, all these trains do stop at Kannur which is the nearest ‘major’ railway station located at a distance of approximately 35 km from INA. The broad-gauge rail network also links Payyanur to Chennai and other major cities in eastern India (via Chennai) and southern India (via Palakkad).</p>
+                </div>
+            </div>
+            <div class="travel-mode-section">
+                <h3 class="travel-mode-header">By Air ✈️</h3>
+                <div class="travel-mode-content">
+                    <p>The nearest airport (Kannur International Airport; Station Code - CNN) is located at Mattannur, at a distance of approximately 60 km from INA. Air India and a number of private airlines operate services from Kannur. The other nearest international airports are located at Mangalore (Station Code - IXE),at a distance of approximately 135 km from INA , Calicut International Airport (Station Code - CCJ),at a distance of approximately 150 km from INA.</p>
+                </div>
+            </div>
+            <div class="travel-mode-section">
+                <h3 class="travel-mode-header">By Road 🚗</h3>
+                <div class="travel-mode-content">
+                    <p>In terms of road connectivity, Payyanur town is situated along National Highway 17 between Mangalore and Kannur, thereby providing adequate road connectivity in both the northerly and the southerly directions. Adequate signage exists on the highway and on the streets of Payyanur, to lead a visitor to the INA.</p>
+                </div>
+            </div>
+          </div>
+          `,
+          'Security Guidelines': `
+              <h3>Guidelines for Parents of Visiting cadets</h3>
+              <p>All visitors with official permission must adhere to the following guidelines:</p>
+              <ol>
+                  <li>Parents are advised not to go about in academy premises.</li>
+                  <li>Naval academy is a "plastic free zone", we would appreciated all our guests/visitors who help us maintain so.</li>
+                  <li>Swimming is prohibited in the beach.</li>
+                  <li>Alcohol is strictly prohibited and same cannot be brought inside the academy.</li>
+                  <li>Adhere to traffic rules.</li>
+                  <li>No smoking in open area.</li>
+                  <li>Photography is permitted at pralaya, war memorial, light house zamorin beach, permission need to be obtained from Flotilla/training wing for photographing in any other location.</li>
+                  <li>Always carry ID proof/invitation/permission letter.</li>
+                  <li>Any electronic device capable of storing data is not permitted inside the base.</li>
+                  <li>Do not park private vehicles in "no parking areas" and on roads.</li>
+                  <li>Parents are requested to be on time whenever required.</li>
+                  <liPlease follow instructions, if any, from naval provost Staff.</li>
+              </ol>
+          `
+      };
+
+      return contactContentMap[key] || `
+          <h3>Content Unavailable</h3>
+          <p>Information for "${key}" is currently being updated. Please check back later or use the general queries contact details.</p>
+      `;
+  }
+
+    function getCourseContent(title) {
+    const contentMap = {
+    'INAC BTech': `
+      <p>The INAC (BTech) aspiring male students upon successful completion of their 10+2 scholastic system with Physics, Chemistry and Mathematics as their senior secondary electives, have to clear the national level entrance examination conducted by UPSC (twice a year) followed by the Services Selection Board (SSB) interview, which is a five day long comprehensive assessment of various officer like qualities (OLQ) or the qualities required to become a Naval officer. Successful aspirants are called for joining the Indian Naval Academy Course (INAC) which is the flagship course at INA. At the core of the training curriculum for this course is a full-fledged, four-year ‘BTech.’ Degree Course run under the aegis of the Jawaharlal Nehru University (JNU), New Delhi, and fully supported and supervised by the All India Council for Technical Education (AICTE).</p>
+      <p>Cadets of the INAC (BTech) course are subjected to the academic rigours of a carefully-structured syllabus spread over a four-year period.  Successful cadets are awarded a ‘Bachelor of Technology’ degree in any one of the streams viz., 'Applied Electronics & Communication', ‘Electronics-and-Communications’, or ‘Mechanical Engineering’.  The stringency of this ‘B.Tech.’ programme is over and above the demands of a ‘parallel’ syllabus that involves training in a number of disciplines and subjects relevant to the Indian Navy and its leadership.</p>
+    `,
+    'INAC MSc': `
+      <p>The INAC (MSc) cadets are essentially those who have completed their three year training at National Defence Academy (NDA), Khadakwasla and join their INAC (BTech) counterparts during the final year of training at Indian Naval Academy (INA). These cadets undergo a carefully-structured two year MSc in Applied Electronics & Communication, run under the aegis of the Jawaharlal Nehru University (JNU), New Delhi, of which the first year is completed here at the INA and the final year onboard the 1st Training Squadron during their afloat training phase. The INAC (MSc) cadets pass out through the portals of INA along with their INAC (BTech) counterparts on successful completion of first year of MSc programme.</p>
+    `,
+    'NOC (Reg)': `
+      <p>Graduate and want to serve the nation? The Indian Naval Academy in its diverse options gives you the golden chance of taking a dip in the ocean of opportunities; make your dream come true so you also may pursue the naval way of life rather than just a profession. The NOC is designed specifically to orient selective cadets towards the navy, so they may also come to know about the traditions that mark the glorious past of Navy. After clearing the SSB cadet needs to spend a total of 22 weeks in the academy during which he/she will be fully oriented towards the Navy so you may find yourself in place after your commissioning. During the training of course one will be treated as officer cadet.</p>
+    `,
+    'NOC (Ext)': `
+      <p>Engineering graduate in any stream and want to join executive branch of Navy? The Indian Naval Academy in its diverse options gives you the golden chance of taking a dip in the ocean of opportunities, make your dream come true so you also may pursue the naval way of life rather than just a profession. The NOC(Ext) is designed specifically to orient selected cadets towards the executive branch of navy, so they may also come to know about the traditions that mark the glorious past of Navy. After clearing the SSB cadet needs to spend a total of one year in the academy during which he will be fully oriented towards the Navy.</p>
+    `
+    };
+    return contentMap[title] || `<p>Details for ${title} are currently unavailable. Please check back later.</p>`;
+  }
