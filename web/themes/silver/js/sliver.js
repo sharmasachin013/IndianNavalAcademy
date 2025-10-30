@@ -794,21 +794,3 @@ function showNextEventSlide() {
       `;
   }
 
-    function getCourseContent(title) {
-    const contentMap = {
-    'INAC BTech': `
-      <p>The INAC (BTech) aspiring male students upon successful completion of their 10+2 scholastic system with Physics, Chemistry and Mathematics as their senior secondary electives, have to clear the national level entrance examination conducted by UPSC (twice a year) followed by the Services Selection Board (SSB) interview, which is a five day long comprehensive assessment of various officer like qualities (OLQ) or the qualities required to become a Naval officer. Successful aspirants are called for joining the Indian Naval Academy Course (INAC) which is the flagship course at INA. At the core of the training curriculum for this course is a full-fledged, four-year ‘BTech.’ Degree Course run under the aegis of the Jawaharlal Nehru University (JNU), New Delhi, and fully supported and supervised by the All India Council for Technical Education (AICTE).</p>
-      <p>Cadets of the INAC (BTech) course are subjected to the academic rigours of a carefully-structured syllabus spread over a four-year period.  Successful cadets are awarded a ‘Bachelor of Technology’ degree in any one of the streams viz., 'Applied Electronics & Communication', ‘Electronics-and-Communications’, or ‘Mechanical Engineering’.  The stringency of this ‘B.Tech.’ programme is over and above the demands of a ‘parallel’ syllabus that involves training in a number of disciplines and subjects relevant to the Indian Navy and its leadership.</p>
-    `,
-    'INAC MSc': `
-      <p>The INAC (MSc) cadets are essentially those who have completed their three year training at National Defence Academy (NDA), Khadakwasla and join their INAC (BTech) counterparts during the final year of training at Indian Naval Academy (INA). These cadets undergo a carefully-structured two year MSc in Applied Electronics & Communication, run under the aegis of the Jawaharlal Nehru University (JNU), New Delhi, of which the first year is completed here at the INA and the final year onboard the 1st Training Squadron during their afloat training phase. The INAC (MSc) cadets pass out through the portals of INA along with their INAC (BTech) counterparts on successful completion of first year of MSc programme.</p>
-    `,
-    'NOC (Reg)': `
-      <p>Graduate and want to serve the nation? The Indian Naval Academy in its diverse options gives you the golden chance of taking a dip in the ocean of opportunities; make your dream come true so you also may pursue the naval way of life rather than just a profession. The NOC is designed specifically to orient selective cadets towards the navy, so they may also come to know about the traditions that mark the glorious past of Navy. After clearing the SSB cadet needs to spend a total of 22 weeks in the academy during which he/she will be fully oriented towards the Navy so you may find yourself in place after your commissioning. During the training of course one will be treated as officer cadet.</p>
-    `,
-    'NOC (Ext)': `
-      <p>Engineering graduate in any stream and want to join executive branch of Navy? The Indian Naval Academy in its diverse options gives you the golden chance of taking a dip in the ocean of opportunities, make your dream come true so you also may pursue the naval way of life rather than just a profession. The NOC(Ext) is designed specifically to orient selected cadets towards the executive branch of navy, so they may also come to know about the traditions that mark the glorious past of Navy. After clearing the SSB cadet needs to spend a total of one year in the academy during which he will be fully oriented towards the Navy.</p>
-    `
-    };
-    return contentMap[title] || `<p>Details for ${title} are currently unavailable. Please check back later.</p>`;
-  }

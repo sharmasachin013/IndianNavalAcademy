@@ -23,6 +23,7 @@
         "drupal/devel": "^5.4",
         "drupal/fontawesome": "^3.0",
         "drupal/media_directories": "^2.2@beta",
+        "drupal/menu_link_attributes": "^1.5",
         "drupal/views_tree": "^3.0",
         "drush/drush": "^13.6"
     },

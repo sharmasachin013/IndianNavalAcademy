@@ -42,16 +42,24 @@
 {% import _self as menus %}
 {% if items %}
 {% for item in items %}
+{# {{ dump(item.attributes.class)}} #}
 <div class="vmenu-item">
     {# Top-level label #}
     <div class="vmenu-label">{{ item.title }}</div>
 
     {% if item.below %}
+    {% set func_name = sub_item.attributes['data-func'] ?? 'showCourseDetails' %}
+    {# {{ dump(item.attributes.class['#value']) }} #}
     {# Dropdown container with custom class #}
     <div class="vmenu-dropdown level-{{ menu_level + 1 }}">
         {# Recursive call for submenu items #}
         {% for sub_item in item.below %}
-        <a  id="{{ sub_item.title|clean_id }}" href="{{ sub_item.url }}"  onclick="showCourseDetails('{{ sub_item.title }}'); return false;">{{ sub_item.title }}</a>
+        {# <a  id="{{ sub_item.title|clean_id }}" href="{{ sub_item.url }}"  onclick="showCourseDetails('{{ sub_item.title }}'); return false;">{{ sub_item.title }}</a> #}
+         {# <a  id="{{ sub_item.title|clean_id }}"  onclick="{{ item.attributes['class'] }}('{{ sub_item.title|escape('js') }}'); return false;" >{{ sub_item.title }}</a> #}
+        <a id="{{ sub_item.title|clean_id }}" href="{{ sub_item.url }}"
+            onclick="{{ func_name }}('{{ sub_item.title|escape('js') }}'); return false;">
+            {{ sub_item.title }}
+        </a>
         {# Check for nested submenus #}
         {% if sub_item.below %}
         {{ menus.vertical_menu_links(sub_item.below, menu_level + 1) }}
